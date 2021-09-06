@@ -17,4 +17,4 @@
 	></ngx-intl-tel-input>
 </form>
 
-<button [disabled]="!form?.valid" (click)="open()">start conversation</button>
+<button (keydown.enter) = "open()" [disabled]="!form?.valid" (click)="open()">start conversation</button>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   CountryISO,
@@ -30,7 +30,6 @@ export class AppComponent {
   });
 
   open() {
-    debugger;
     if (this.form.valid) {
       const url = this.getLink(this.form.value.phone.e164Number);
       window.open(url, '_blank');
@@ -39,5 +38,12 @@ export class AppComponent {
 
   getLink(phoneNumber: string): string {
     return this.link.replace('send?phone=', `send?phone=${phoneNumber}`);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key.toLocaleLowerCase() == 'enter') {
+      this.open();
+    }
   }
 }
