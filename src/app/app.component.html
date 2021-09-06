@@ -1,0 +1,20 @@
+<form #f="ngForm" [formGroup]="phoneForm">
+	<ngx-intl-tel-input #input
+		[cssClass]="'custom'"
+		[preferredCountries]="preferredCountries"
+		[separateDialCode] ="true"
+		[enableAutoCountrySelect]="false"
+		[enablePlaceholder]="true"
+		[searchCountryFlag]="true"
+		[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+		[selectFirstCountry]="false"
+		[selectedCountryISO]="selectedCountryISO"
+		[maxLength]="15"
+		[phoneValidation]="true"
+		inputId="id"
+		name="phone"
+		formControlName="phone"
+	></ngx-intl-tel-input>
+</form>
+
+<button [disabled]="!form?.valid" (click)="open()">start conversation</button>
