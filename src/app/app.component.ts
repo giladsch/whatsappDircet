@@ -37,14 +37,15 @@ export class AppComponent {
   open() {
     if (this.form.valid) {
       const url = this.getLink(this.form.value.phone.e164Number);
+      debugger;
       window.open(url, '_blank');
     }
   }
 
   getLink(phoneNumber: string): string {
     return isMobile({ tablet: true, featureDetect: true })
-      ? this.mobileLink.replace(`${hiddenSymbol}`, `${phoneNumber}`)
-      : `${this.desktopLink}${phoneNumber}`;
+      ? `${this.mobileLink}${phoneNumber}`
+      : this.desktopLink.replace(`${hiddenSymbol}`, `${phoneNumber}`);
   }
 
   @HostListener('document:keydown', ['$event'])
