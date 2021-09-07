@@ -1,10 +1,13 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import isMobile from 'is-mobile';
 import {
   CountryISO,
   PhoneNumberFormat,
   SearchCountryField,
 } from 'ngx-intl-tel-input';
+
+const hiddenSymbol = '0000';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,9 @@ import {
 })
 export class AppComponent {
   @ViewChild('f') form: FormControl;
-  link = 'https://web.whatsapp.com/send?phone=&text&app_absent=0/';
+  const;
+  desktopLink = `https://web.whatsapp.com/send?phone=${hiddenSymbol}&text&app_absent=0/`;
+  mobileLink = 'https://wa.me/';
   separateDialCode = true;
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
@@ -37,7 +42,9 @@ export class AppComponent {
   }
 
   getLink(phoneNumber: string): string {
-    return this.link.replace('send?phone=', `send?phone=${phoneNumber}`);
+    return isMobile({ tablet: true, featureDetect: true })
+      ? this.mobileLink.replace(`${hiddenSymbol}`, `${phoneNumber}`)
+      : `${this.desktopLink}${phoneNumber}`;
   }
 
   @HostListener('document:keydown', ['$event'])
