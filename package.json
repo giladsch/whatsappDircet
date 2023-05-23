@@ -11,6 +11,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "vercel":"ng build --configuration production",
     "heroku-postbuild": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --configuration production"
   },
   "private": true,
